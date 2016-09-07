@@ -1,21 +1,24 @@
 version: '2'
 services:
-  web:
+  rails:
     build: .
-    image: web_multicontainer
+    image: app1-rails
     volumes:
-      - ./log:/app/log
+      - ./:/app
+    environment:
+      - RAILS_LOG_TO_STDOUT=1
     depends_on:
       - db
 
   nginx:
     build: containers/nginx
+    image: app1-nginx
     ports:
       - "80:80"
     volumes_from:
-      - web
+      - rails
     depends_on:
-      - web
+      - rails
 
   db:
     image: postgres
