@@ -15,10 +15,6 @@ services:
     image: app1-nginx
     ports:
       - "80:80"
-    volumes_from:
-      - rails
-    depends_on:
-      - rails
 
   db:
     image: postgres
