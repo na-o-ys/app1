@@ -13,8 +13,12 @@ services:
   nginx:
     build: containers/nginx
     image: app1-nginx
+    environment:
+      - RAILS_HOST=rails
     ports:
       - "80:80"
+    depends_on:
+      - rails
 
   db:
     image: postgres
